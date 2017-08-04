@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+
+    tools:context="uk.androidtracker.gazetracker.gazetrackertabsdemo.MainActivity">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+
+
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageButton
+        android:id="@+id/button_share"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@drawable/fab"
+        android:clickable="true"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.909"
+        app:srcCompat="@drawable/icons8share"
+        android:adjustViewBounds="true"
+        android:padding="6dp"
+        android:scaleType="fitCenter"
+        />
+
+    <ImageButton
+        android:id="@+id/button_gaze"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@drawable/fab"
+        android:clickable="true"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.38"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.81"
+        app:srcCompat="@drawable/icons8eye"
+        android:adjustViewBounds="true"
+        android:padding="6dp"
+        android:scaleType="fitCenter"/>
+
+    <ImageButton
+        android:id="@+id/button_statistic"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/fab"
+        android:clickable="true"
+        android:padding="6dp"
+        android:scaleType="fitCenter"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.61"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.81"
+        app:srcCompat="@drawable/icons8increase" />
+
+    <ImageButton
+        android:id="@+id/button_setting"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@drawable/fab"
+        android:clickable="true"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.909"
+        app:srcCompat="@drawable/icons8settings"
+        android:adjustViewBounds="true"
+        android:padding="6dp"
+        android:scaleType="fitCenter"/>
+
+    <ImageButton
+        android:id="@+id/fab_vk"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+
+
+        android:adjustViewBounds="true"
+        android:background="@drawable/sharebutton"
+        android:clickable="false"
+
+        android:scaleType="fitCenter"
+        android:src="@drawable/icons8instagram"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.255"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.761" />
+
+    <ImageButton
+        android:id="@+id/fab_fb"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+
+
+        android:adjustViewBounds="true"
+        android:background="@drawable/sharebutton"
+        android:clickable="false"
+
+        android:scaleType="fitCenter"
+        android:src="@drawable/icons8facebook"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.174"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.827" />
+
+    <ImageButton
+        android:id="@+id/fab_tw"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+
+
+        android:adjustViewBounds="true"
+        android:background="@drawable/sharebutton"
+        android:clickable="false"
+
+        android:scaleType="fitCenter"
+        android:src="@drawable/icons8twitter"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.375"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.721" />
+
+    <ImageButton
+        android:id="@+id/button_main"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:background="@drawable/main_button"
+
+        android:clickable="true"
+        android:elevation="20dp"
+
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.958" />
+
+</android.support.constraint.ConstraintLayout>
