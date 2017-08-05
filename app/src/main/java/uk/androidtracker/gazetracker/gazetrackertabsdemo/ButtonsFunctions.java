@@ -11,10 +11,12 @@ import android.provider.CalendarContract;
 import android.support.v4.view.ViewPager;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 
+import jp.wasabeef.blurry.Blurry;
 import uk.androidtracker.gazetracker.gazetrackertabsdemo.fragments.StatisticFragment;
 
 
@@ -120,8 +122,12 @@ public class ButtonsFunctions {
                 {
                     lastDown = System.currentTimeMillis();
                     buttonsShow();
-                    if(mViewPager.getCurrentItem()==1)
-                        StatisticFragment.hide_map_bot();
+                    if(mViewPager.getCurrentItem()==1){
+                        StatisticFragment.hide_map();
+
+                    }
+
+
 
 
                 }
@@ -137,7 +143,12 @@ public class ButtonsFunctions {
                     buttonsHide();
                     shareButtonsHide();
                     lastDown = 0;
-                    StatisticFragment.show_map_bot();
+
+
+                    if(mViewPager.getCurrentItem()==1){
+                        StatisticFragment.show_map();
+
+                    }
 
                     //=========================================================
                 }else if (event.getAction() == MotionEvent.ACTION_MOVE)

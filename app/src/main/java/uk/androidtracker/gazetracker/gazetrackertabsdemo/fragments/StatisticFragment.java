@@ -2,10 +2,12 @@ package uk.androidtracker.gazetracker.gazetrackertabsdemo.fragments;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,7 +54,7 @@ public class StatisticFragment extends Fragment{
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     static MapView mMapView;
-    static CardView cardV;
+    static ImageView blurView;
 
     private GoogleMap googleMap;
     private LineChart chart;
@@ -67,6 +69,9 @@ public class StatisticFragment extends Fragment{
     private static boolean mapShowTop = true;
     private static boolean mapShowBot = true;
     private static boolean animationEnd = true;
+
+    public static Bitmap b;
+    public static ViewGroup v;
 
     public StatisticFragment() {
     }
@@ -87,13 +92,13 @@ public class StatisticFragment extends Fragment{
         mMapView.onCreate(savedInstanceState);
         initMap();
 
+        v = (ViewGroup) getActivity().findViewById(R.id.information);
 
 
-        chart = (LineChart) rootView.findViewById(R.id.chart);
 
-        initChart();
+        //initChart();
 
-        //cardV = (CardView) rootView.findViewById(R.id.cardView2);
+
         map_hide_bottom = AnimationUtils.loadAnimation(context, R.anim.map_hide_bot);
         map_show_bottom = AnimationUtils.loadAnimation(context, R.anim.map_show_bot);
         map_hide_top = AnimationUtils.loadAnimation(context, R.anim.map_hide_top);
@@ -155,15 +160,9 @@ public class StatisticFragment extends Fragment{
                     @Override
                     public boolean onMarkerClick(Marker marker) {
                         if(mapShowTop){
-                            //hide_map_top();
-                            Blurry.with(context)
-                                    .radius(25)
-                                    .sampling(2)
-                                    .async()
-                                    .animate(1000)
-                                    .onto((ViewGroup) getActivity().findViewById(R.id.layout_statistic));
+                            hide_map();
                         }else{
-                            show_map_top();
+                            show_map();
                         }
                         return true;
                     }
@@ -270,14 +269,15 @@ public class StatisticFragment extends Fragment{
 
     }
 
-    public static void hide_map_bot(){
+
+    public static void hide_map(){
         if(mapShowBot){
             mMapView.startAnimation(map_hide_bottom);
             mapShowBot = false;
         }
     }
 
-    public static void show_map_bot(){
+    public static void show_map(){
         if(!mapShowBot){
             mMapView.startAnimation(map_show_bottom);
             mapShowBot = true;
@@ -286,14 +286,14 @@ public class StatisticFragment extends Fragment{
 
     public static void hide_map_top(){
         if(mapShowTop){
-            mMapView.startAnimation(map_hide_top);
+            v.startAnimation(map_show_bottom);
             mapShowTop = false;
         }
     }
 
     public static void show_map_top(){
         if(!mapShowTop){
-            mMapView.startAnimation(map_show_top);
+            v.startAnimation(map_show_bottom);
             mapShowTop = true;
         }
     }
