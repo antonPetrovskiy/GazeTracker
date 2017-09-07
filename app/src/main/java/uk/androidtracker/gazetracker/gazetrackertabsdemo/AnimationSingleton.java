@@ -28,12 +28,17 @@ public class AnimationSingleton {
     private Animation animationGazeBig;
     private Animation animationStatisticListShow;
     private Animation animationStatisticListHide;
+    private Animation animationStatisticShow;
+    private Animation animationStatisticHide;
+
 
     public void initAnimation(){
         animationGazeSmall = AnimationUtils.loadAnimation(rootActivity.getApplication(), R.anim.gaze_small);
         animationGazeBig = AnimationUtils.loadAnimation(rootActivity.getApplication(), R.anim.gaze_big);
         animationStatisticListShow = AnimationUtils.loadAnimation(rootActivity.getApplication(), R.anim.statistic_list_show);
         animationStatisticListHide = AnimationUtils.loadAnimation(rootActivity.getApplication(), R.anim.statistic_list_hide);
+        animationStatisticShow = AnimationUtils.loadAnimation(rootActivity.getApplication(), R.anim.statistic_show);
+        animationStatisticHide = AnimationUtils.loadAnimation(rootActivity.getApplication(), R.anim.statistic_hide);
     }
 
     public void setContext(Activity a){
@@ -55,5 +60,13 @@ public class AnimationSingleton {
 
     public Animation getAnimationStatisticListHide() {
         return animationStatisticListHide;
+    }
+
+    public Animation getAnimationStatisticShow() {
+        return animationStatisticShow;
+    }
+
+    public Animation getAnimationStatisticHide() {
+        return animationStatisticHide;
     }
 }

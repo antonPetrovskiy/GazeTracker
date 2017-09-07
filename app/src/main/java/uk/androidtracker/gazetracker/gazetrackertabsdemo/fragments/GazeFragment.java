@@ -5,14 +5,16 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import jp.wasabeef.blurry.Blurry;
+
 import uk.androidtracker.gazetracker.gazetrackertabsdemo.AnimationSingleton;
 import uk.androidtracker.gazetracker.gazetrackertabsdemo.R;
 
@@ -28,17 +30,20 @@ public class GazeFragment extends Fragment {
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
     static TextView tv2;
-    static TextView tv;
-    ListView list;
-    static int gazes = 0;
+    static TextView gazeString;
+
+    static private int gazes = 0;
+    static private int curGazes = 0;
     private ImageButton statistic;
+    private ImageView selector1;
+    private ImageView selector2;
+    private ImageView selector3;
+    private ImageView selector4;
     static Context context;
+
+
     private boolean isStatisticShowed = false;
-    String[] enteries = {
-            "Total gazes                                     265",
-            "Daily gazes                                     12",
-            "Weekly gazes                                 54",
-            "Monthly gazes                               128"};
+
 
     public GazeFragment() {
     }
@@ -58,36 +63,32 @@ public class GazeFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_gaze, container, false);
 
-        tv = (TextView)rootView.findViewById(R.id.textView);
+        gazeString = (TextView)rootView.findViewById(R.id.textView);
         tv2 = (TextView)rootView.findViewById(R.id.textView2);
-        statistic = (ImageButton) rootView.findViewById(R.id.statistic);
         Typeface face = Typeface.createFromAsset(context.getAssets(), "lane-narrow.ttf");
-        tv.setTypeface(face);
+        gazeString.setTypeface(face);
         tv2.setTypeface(face);
 
+        selector1 = (ImageView)  rootView.findViewById(R.id.selector1);
+        selector2 = (ImageView)  rootView.findViewById(R.id.selector2);
+        selector3 = (ImageView)  rootView.findViewById(R.id.selector3);
+        selector4 = (ImageView)  rootView.findViewById(R.id.selector4);
 
-        // находим список
-        list = (ListView) rootView.findViewById(R.id.statistic_view);
-
-        // создаем адаптер
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, enteries);
-
-        // присваиваем адаптер списку
-        list.setAdapter(adapter);
+        selectorsInit();
 
 
-        tv2.setOnClickListener(new View.OnClickListener() {
+
+        gazeString.setOnTouchListener(new View.OnTouchListener(){
             @Override
-            public void onClick(View view) {
-                gazes++;
-                String s = String.valueOf(gazes);
-                tv.setText(s);
+            public boolean onTouch(View v, MotionEvent event) {
+                return false;
             }
         });
 
-        statistic.setOnClickListener(new View.OnClickListener() {
+
+        tv2.setOnLongClickListener(new View.OnLongClickListener(){
             @Override
-            public void onClick(View view) {
+            public boolean onLongClick(View view) {
                 if(isStatisticShowed){
                     hideStatistic();
                     isStatisticShowed = false;
@@ -95,8 +96,18 @@ public class GazeFragment extends Fragment {
                     showStatistic();
                     isStatisticShowed = true;
                 }
+                return true;
             }
         });
+
+        tv2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gazes++;
+                setGazes(gazes);
+            }
+        });
+
 
 
         return rootView;
@@ -104,16 +115,73 @@ public class GazeFragment extends Fragment {
 
     }
 
+
+    public void selectorsInit(){
+        selector1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setGazes(5);
+                tv2.setText("Daily views");
+                hideStatistic();
+                isStatisticShowed = false;
+            }
+        });
+
+        selector2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setGazes(23);
+                tv2.setText("Weekly views");
+                hideStatistic();
+                isStatisticShowed = false;
+            }
+        });
+
+        selector3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setGazes(64);
+                tv2.setText("Monthly views");
+                hideStatistic();
+                isStatisticShowed = false;
+            }
+        });
+
+        selector4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setGazes(98);
+                tv2.setText("All time views");
+                hideStatistic();
+                isStatisticShowed = false;
+            }
+        });
+    }
+
+    public void setGazes(int n){
+        String s = String.valueOf(n);
+        gazes = n;
+        gazeString.setText(s);
+    }
+
     public void showStatistic(){
-        tv.startAnimation(AnimationSingleton.getInstance().getAnimationGazeSmall());
-        list.startAnimation(AnimationSingleton.getInstance().getAnimationStatisticListShow());
-        tv2.startAnimation(AnimationSingleton.getInstance().getAnimationStatisticListHide());
+        gazeString.startAnimation(AnimationSingleton.getInstance().getAnimationGazeSmall());
+        //tv2.startAnimation(AnimationSingleton.getInstance().getAnimationStatisticHide());
+
+        selector1.startAnimation(AnimationSingleton.getInstance().getAnimationStatisticListShow());
+        selector2.startAnimation(AnimationSingleton.getInstance().getAnimationStatisticListShow());
+        selector3.startAnimation(AnimationSingleton.getInstance().getAnimationStatisticListShow());
+        selector4.startAnimation(AnimationSingleton.getInstance().getAnimationStatisticListShow());
     }
 
     public void hideStatistic(){
-        tv.startAnimation(AnimationSingleton.getInstance().getAnimationGazeBig());
-        list.startAnimation(AnimationSingleton.getInstance().getAnimationStatisticListHide());
-        tv2.startAnimation(AnimationSingleton.getInstance().getAnimationStatisticListShow());
+        gazeString.startAnimation(AnimationSingleton.getInstance().getAnimationGazeBig());
+        //tv2.startAnimation(AnimationSingleton.getInstance().getAnimationStatisticShow());
+        gazeString.setVisibility(View.VISIBLE);
+        selector1.startAnimation(AnimationSingleton.getInstance().getAnimationStatisticListHide());
+        selector2.startAnimation(AnimationSingleton.getInstance().getAnimationStatisticListHide());
+        selector3.startAnimation(AnimationSingleton.getInstance().getAnimationStatisticListHide());
+        selector4.startAnimation(AnimationSingleton.getInstance().getAnimationStatisticListHide());
     }
 
 }

@@ -3,11 +3,12 @@
     <translate android:interpolator="@android:anim/linear_interpolator"
         android:duration="500"
         android:fromXDelta="0%"
-        android:toXDelta="-70%"
+        android:toXDelta="-130%"
         android:fromYDelta="0%"
-        android:toYDelta="200%" />
-    <alpha android:interpolator="@android:anim/linear_interpolator"
+        android:toYDelta="30%" />
+    <alpha
         android:duration="500"
         android:fromAlpha="1.0"
-        android:toAlpha="0.0" />
+        android:toAlpha="0.0" >
+    </alpha>
 </set>

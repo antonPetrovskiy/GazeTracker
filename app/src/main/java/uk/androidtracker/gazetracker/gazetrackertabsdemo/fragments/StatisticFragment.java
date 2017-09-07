@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -14,13 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.StackView;
 import android.widget.TextView;
 
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -39,7 +38,6 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import java.util.ArrayList;
 import java.util.List;
 
-import jp.wasabeef.blurry.Blurry;
 import retrofit.RestAdapter;
 import uk.androidtracker.gazetracker.gazetrackertabsdemo.R;
 
@@ -54,24 +52,17 @@ public class StatisticFragment extends Fragment{
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     static MapView mMapView;
-    static ImageView blurView;
+    static ImageView stats;
 
     private GoogleMap googleMap;
-    private LineChart chart;
     static Context context;
-
-    private TextView tw;
+    private StackView stackView;
 
     private static Animation map_hide_bottom;
     private static Animation map_show_bottom;
-    private static Animation map_hide_top;
-    private static Animation map_show_top;
     private static boolean mapShowTop = true;
     private static boolean mapShowBot = true;
-    private static boolean animationEnd = true;
-
-    public static Bitmap b;
-    public static ViewGroup v;
+    private boolean cardsShow = false;
 
     public StatisticFragment() {
     }
@@ -92,26 +83,24 @@ public class StatisticFragment extends Fragment{
         mMapView.onCreate(savedInstanceState);
         initMap();
 
-        v = (ViewGroup) getActivity().findViewById(R.id.information);
-
-
-
-        //initChart();
-
+        stackView = (StackView) rootView.findViewById(R.id.stackView);
+        ArrayList<Integer> images = new ArrayList<>();
+        images.add(R.drawable.statistic);
+        images.add(R.drawable.statistic);
+        images.add(R.drawable.statistic);
+        images.add(R.drawable.statistic);
+        images.add(R.drawable.statistic);
+        stackView.setAdapter(new StackAdapter(images));
+        stackView.setFadingEdgeLength(0);
+        stackView.setVerticalScrollbarPosition(2);
 
         map_hide_bottom = AnimationUtils.loadAnimation(context, R.anim.map_hide_bot);
         map_show_bottom = AnimationUtils.loadAnimation(context, R.anim.map_show_bot);
-        map_hide_top = AnimationUtils.loadAnimation(context, R.anim.map_hide_top);
-        map_show_top = AnimationUtils.loadAnimation(context, R.anim.map_show_top);
-
         return rootView;
     }
 
     private void initMap(){
-
-
         mMapView.onResume(); // needed to get the map to display immediately
-
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
         } catch (Exception e) {
@@ -122,12 +111,8 @@ public class StatisticFragment extends Fragment{
             @Override
             public void onMapReady(GoogleMap mMap) {
                 googleMap = mMap;
-
                 // For showing a move to my location button
                 //googleMap.setMyLocationEnabled(true);
-
-
-
                 try {
                     // Customise the styling of the base map using a JSON object defined
                     // in a raw resource file.
@@ -159,10 +144,12 @@ public class StatisticFragment extends Fragment{
                 googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                     @Override
                     public boolean onMarkerClick(Marker marker) {
-                        if(mapShowTop){
-                            hide_map();
+                        if(!cardsShow){
+                            stackView.setVisibility(View.VISIBLE);
+                            cardsShow = true;
                         }else{
-                            show_map();
+                            stackView.setVisibility(View.INVISIBLE);
+                            cardsShow = false;
                         }
                         return true;
                     }
@@ -173,45 +160,6 @@ public class StatisticFragment extends Fragment{
         });
 
 
-
-
-    }
-
-    private void initChart(){
-        List<Entry> entries = new ArrayList<Entry>();
-
-        entries.add(new Entry(0, 0));
-        entries.add(new Entry(1, 2));
-        entries.add(new Entry(2, 4));
-        entries.add(new Entry(3, 4));
-        entries.add(new Entry(4, 5));
-        entries.add(new Entry(5, 8));
-        entries.add(new Entry(6, 12));
-
-
-        LineDataSet dataSet = new LineDataSet(entries, "");
-        dataSet.setLineWidth(5);
-        dataSet.setCircleRadius(7);
-        dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-        //dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-        //delete grid lines
-        chart.getXAxis().setDrawGridLines(false);
-        chart.getAxisLeft().setDrawAxisLine(false);
-        chart.getAxisRight().setDrawAxisLine(false);
-        chart.getXAxis().setEnabled(false);
-        chart.getAxisLeft().setDrawGridLines(false);
-        chart.getAxisRight().setDrawGridLines(false);
-
-        chart.getLegend().setEnabled(false);
-        chart.getAxisLeft().setDrawLabels(false);
-        chart.getAxisRight().setDrawLabels(false);
-        chart.getDescription().setText("");
-        animate();
-
-
-        LineData lineData = new LineData(dataSet);
-        chart.setData(lineData);
-        chart.invalidate(); // refresh
     }
 
     public void route(){
@@ -229,7 +177,11 @@ public class StatisticFragment extends Fragment{
         LatLng end = new LatLng(40.70774254, -74.01289701);
 
         PolylineOptions line = new PolylineOptions();
-        line.width(15f).color(Color.GREEN);
+        int[] colors = {Color.parseColor("#b929ff"),Color.parseColor("#206aff")};
+        GradientDrawable gd = new GradientDrawable(
+                GradientDrawable.Orientation.TOP_BOTTOM, colors);
+        gd.setCornerRadius(0f);
+        line.width(15f).color(Color.parseColor("#FF673AB7"));
         LatLngBounds.Builder latLngBuilder = new LatLngBounds.Builder();
 
                 MarkerOptions startMarkerOptions = new MarkerOptions()
@@ -284,23 +236,44 @@ public class StatisticFragment extends Fragment{
         }
     }
 
-    public static void hide_map_top(){
-        if(mapShowTop){
-            v.startAnimation(map_show_bottom);
-            mapShowTop = false;
+    public static void showStatistic(){
+
+    }
+
+    public static void hideStatistic(){
+
+    }
+
+    private class StackAdapter extends BaseAdapter {
+        ArrayList<Integer> images;
+
+        public StackAdapter(ArrayList<Integer> images) {
+            this.images = images;
+        }
+
+        @Override
+        public int getCount() {
+            return images.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return position;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View view, ViewGroup viewGroup) {
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+            View v = inflater.inflate(R.layout.img_stack, viewGroup, false);
+            ImageView img = (ImageView) v.findViewById(R.id.imgStack);
+            // img.setBackgroundColor(images.get(position));
+            img.setImageResource(images.get(position));
+            return v;
         }
     }
-
-    public static void show_map_top(){
-        if(!mapShowTop){
-            v.startAnimation(map_show_bottom);
-            mapShowTop = true;
-        }
-    }
-
-    public void animate(){
-        chart.animateY(5000);
-    }
-
-
 }

@@ -4,14 +4,14 @@
         android:duration="1000"
         android:pivotX="50%"
         android:pivotY="50%"
-        android:fromXScale="0.5"
-        android:fromYScale="0.5"
+        android:fromXScale="0.6"
+        android:fromYScale="0.6"
         android:toXScale="1"
         android:toYScale="1" />
     <translate
         android:duration="1000"
         android:fromXDelta="0%"
         android:toXDelta="0%"
-        android:fromYDelta="-30%"
+        android:fromYDelta="20%"
         android:toYDelta="0%" />
 </set>

@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@drawable/bg"
 
     tools:context="uk.androidtracker.gazetracker.gazetrackertabsdemo.MainActivity">
 
@@ -18,123 +19,136 @@
 
         app:layout_constraintVertical_bias="1.0" />
 
-    <ImageButton
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/button_share"
         android:layout_width="56dp"
         android:layout_height="56dp"
-        android:background="@drawable/fab"
-        android:clickable="true"
+        android:stateListAnimator="@null"
         android:visibility="invisible"
+        android:scaleType="centerInside"
+        app:fabSize="mini"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.909"
-        app:srcCompat="@drawable/icons8share"
-        android:adjustViewBounds="true"
-        android:padding="6dp"
-        android:scaleType="fitCenter"
-        />
 
-    <ImageButton
+        app:layout_constraintVertical_bias="0.909"
+        app:backgroundTint="@color/common_google_signin_btn_text_dark_default"
+        app:srcCompat="@drawable/icons8share" />
+
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/button_gaze"
         android:layout_width="56dp"
         android:layout_height="56dp"
-        android:background="@drawable/fab"
-        android:clickable="true"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.38"
+        app:fabSize="mini"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.38"
         app:layout_constraintVertical_bias="0.81"
-        app:srcCompat="@drawable/icons8eye"
-        android:adjustViewBounds="true"
-        android:padding="6dp"
-        android:scaleType="fitCenter"/>
+        android:visibility="invisible"
+        android:stateListAnimator="@null"
 
-    <ImageButton
+        app:backgroundTint="@color/common_google_signin_btn_text_dark_default"
+        app:srcCompat="@drawable/icons8eye" />
+
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/button_statistic"
         android:layout_width="56dp"
         android:layout_height="56dp"
-        android:adjustViewBounds="true"
-        android:background="@drawable/fab"
-        android:clickable="true"
-        android:padding="6dp"
-        android:scaleType="fitCenter"
-        android:visibility="invisible"
+        app:fabSize="mini"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.61"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.61"
         app:layout_constraintVertical_bias="0.81"
+        android:visibility="invisible"
+        android:stateListAnimator="@null"
+
+        app:backgroundTint="@color/common_google_signin_btn_text_dark_default"
         app:srcCompat="@drawable/icons8increase" />
 
-    <ImageButton
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/button_setting"
         android:layout_width="56dp"
         android:layout_height="56dp"
-        android:background="@drawable/fab"
-        android:clickable="true"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.75"
+        app:fabSize="mini"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintVertical_bias="0.909"
-        app:srcCompat="@drawable/icons8settings"
-        android:adjustViewBounds="true"
-        android:padding="6dp"
-        android:scaleType="fitCenter"/>
+        android:visibility="invisible"
+        android:stateListAnimator="@null"
+
+        app:backgroundTint="@color/common_google_signin_btn_text_dark_default"
+        app:srcCompat="@drawable/icons8settings" />
+
 
     <ImageButton
         android:id="@+id/fab_vk"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-
+        android:layout_width="56dp"
+        android:layout_height="56dp"
 
         android:adjustViewBounds="true"
         android:background="@drawable/sharebutton"
         android:clickable="false"
-
         android:scaleType="fitCenter"
         android:src="@drawable/icons8instagram"
         android:visibility="invisible"
+
+        app:layout_constraintHorizontal_bias="0.61"
+        app:layout_constraintVertical_bias="0.81"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.255"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.761" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageButton
         android:id="@+id/fab_fb"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-
-
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:adjustViewBounds="true"
         android:background="@drawable/sharebutton"
         android:clickable="false"
-
         android:scaleType="fitCenter"
         android:src="@drawable/icons8facebook"
         android:visibility="invisible"
+
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.174"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.827" />
+        app:layout_constraintHorizontal_bias="0.38"
+        app:layout_constraintVertical_bias="0.81"
+        />
 
     <ImageButton
         android:id="@+id/fab_tw"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/sharebutton"
+        android:clickable="false"
+        android:scaleType="fitCenter"
+        android:src="@drawable/icons8twitter"
+        android:visibility="invisible"
+
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintVertical_bias="0.909"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/fab_go"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
 
 
         android:adjustViewBounds="true"
@@ -142,23 +156,25 @@
         android:clickable="false"
 
         android:scaleType="fitCenter"
-        android:src="@drawable/icons8twitter"
+        android:src="@drawable/icons8google"
         android:visibility="invisible"
+
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintVertical_bias="0.909"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.375"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.721" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/button_main"
         android:layout_width="85dp"
         android:layout_height="85dp"
         android:background="@drawable/main_button"
-
+        android:src="@drawable/bean"
+        android:padding="16dp"
         android:clickable="true"
-        android:elevation="20dp"
+        android:elevation="40dp"
 
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
